@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Git Essentials</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta keywords="Git">
+<style>
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+color: #24292e;
+font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+  sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+font-size: 16px;
+line-height: 1.6;
+word-wrap: break-word;
+
+.dark, .solarizedDark {
+  color: #FFF;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+a {
+  background-color: transparent;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+[type='checkbox'] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  font: inherit;
+  margin: 0;
+  overflow: visible;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+}
+
+hr:before {
+  content: '';
+  display: table;
+}
+
+hr:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+p {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-roman;
+}
+
+ol ol ol,
+ol ul ol,
+ul ol ol,
+ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+dd {
+  margin-left: 0;
+}
+
+code,
+pre {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+    monospace;
+  font-size: 12px;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+&:before {
+  content: '';
+  display: table;
+}
+
+&:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+> :first-child {
+  margin-top: 0 !important;
+}
+
+> :last-child {
+  margin-bottom: 0 !important;
+}
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+blockquote {
+  margin: 0;
+  border-left: 0.25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+}
+
+blockquote,
+dl,
+ol,
+p,
+pre,
+table,
+ul {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+h1,
+h2 {
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: 0.875em;
+}
+
+h6 {
+  color: #6a737d;
+  font-size: 0.85em;
+}
+
+ol,
+ul {
+  padding-left: 2em;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+li {
+  word-wrap: break-all;
+}
+
+li > p {
+  margin-top: 16px;
+}
+
+li + li {
+  margin-top: 0.25em;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 16px;
+  padding: 0;
+}
+
+dl dd {
+  margin-bottom: 16px;
+  padding: 0 16px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  overflow: auto;
+  width: 100%;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table td,
+table th {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+img {
+  border-style: none;
+  background-color: #fff;
+  box-sizing: content-box;
+  max-width: 100%;
+}
+
+img[align='right'] {
+  padding-left: 20px;
+}
+
+img[align='left'] {
+  padding-right: 20px;
+}
+
+code {
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  padding: 0.2em 0.4em;
+}
+
+p code,
+li code
+{
+  padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+pre {
+  word-wrap: normal;
+}
+
+pre > code {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  word-break: normal;
+}
+
+.highlight {
+  margin-bottom: 16px;
+}
+
+.highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.highlight pre,
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+pre code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  max-width: auto;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+}
+
+kbd {
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-bottom-color: #c6cbd1;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #c6cbd1;
+  color: #444d56;
+  display: inline-block;
+  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+    monospace;
+  line-height: 10px;
+  padding: 3px 5px;
+  vertical-align: middle;
+}
+
+:checked + .radio-label {
+  border-color: #0366d6;
+  position: relative;
+  z-index: 1;
+}
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item + .task-list-item {
+  margin-top: 3px;
+}
+
+.task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+hr {
+  box-sizing: content-box;
+  background: transparent;
+  overflow: hidden;
+  background-color: #e1e4e8;
+  border: 0;
+  height: 0.25em;
+  margin: 24px 0;
+  padding: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.dark p code,
+.dark li code
+{
+  background-color: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+  color: #03C588;
+}
+.auto p code,
+.auto li code
+{
+  background-color: #F9F9F9;
+  border-color: rgba(0,0,0,0.26);
+  color: #03C588;
+}
+.light p code,
+.light li code
+{
+  background-color: #F9F9F9;
+  border-color: rgba(0,0,0,0.26);
+  color: #03C588;
+}
+.sepia p code,
+.sepia li code
+{
+  background-color: #efe8d6;
+  border-color: rgba(0,0,0,0.26);
+  color: #F77942;
+}
+.solarizedDark p code,
+.solarizedDark li code
+{
+  background-color: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+  color: #36abe3;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+</head>
+<body>
+<h1>Git Auto-Complete</h1>
+<h3>This guideline for <strong><em>Mac &#x26; Linux</em></strong> users.</h3>
+<p>If you are using <strong><em>Windows</em></strong> you have already have auto-completion.</p>
+<h2>Let's Start With Dependencies</h2>
+<p>The Git community share scripst on Github. We need open this repository and find <a href="https://github.com/git/git/tree/master/contrib/completion">auto-completion scripts</a> for <em>bash</em> or <em>zsh</em>.</p>
+<ol>
+<li>Create <code>.zsh</code> folder on your top directory.</li>
+<li>Then copy <code>git-completion.zsh</code> and <code>git-completion.bash</code>. We use <em>Curl</em> to download.</li>
+<li>Configuration <code>.zshrc</code> file at top directory.</li>
+</ol>
+<h2>Downloading Scripts</h2>
+<pre class="cm-s-material-darker CodeMirror language-bash"><code class="language-bash"><span>    </span><span class="cm-comment"># Go to top directory</span><span>
+</span><span>    </span><span class="cm-comment"># Create .zsh folder</span><span>
+</span><span>    </span><span class="cm-comment"># Go inside .zsh folder</span><span>
+</span><span>    </span><span class="cm-builtin">cd</span><span>
+</span><span>    </span><span class="cm-builtin">mkdir</span><span> </span><span class="cm-attribute">-p</span><span> </span><span>.zsh</span><span>
+</span><span>    </span><span class="cm-builtin">cd</span><span> </span><span>.zsh</span><span>
+</span><span>    </span><span>
+</span><span>    </span><span class="cm-comment"># Download scripts</span><span>
+</span><span>    </span><span class="cm-builtin">curl</span><span> </span><span class="cm-attribute">-o</span><span> </span><span>git-completion</span><span>.bash</span><span> </span><span>https</span><span>:</span><span>/</span><span>/raw</span><span>.githubusercontent</span><span>.com</span><span>/git</span><span>/git</span><span>/master</span><span>/contrib</span><span>/completion</span><span>/git-completion</span><span>.bash</span><span>
+</span><span>    </span><span class="cm-builtin">curl</span><span> </span><span class="cm-attribute">-o</span><span> </span><span>_git</span><span> </span><span>https</span><span>:</span><span>/</span><span>/raw</span><span>.githubusercontent</span><span>.com</span><span>/git</span><span>/git</span><span>/master</span><span>/contrib</span><span>/completion</span><span>/git-completion</span><span>.zsh</span><span>
+</span><span>    </span><span>
+</span></code></pre>
+<h2>Configuring the Shell</h2>
+<p>To activate the auto-completion, we need the configure <code>.zshrc</code> file. Open <code>.zshrc</code> file and copy following codes.</p>
+<pre class="cm-s-material-darker CodeMirror language-bash"><code class="language-bash"><span>    </span><span class="cm-comment"># Copy this code.</span><span>
+</span><span>zstyle</span><span> </span><span class="cm-string">':completion:*:*:git:*'</span><span> </span><span>script</span><span> </span><span>~</span><span>/</span><span>.zsh</span><span>/git-completion</span><span>.bash</span><span>
+</span><span class="cm-def">fpath</span><span class="cm-operator">=</span><span>(</span><span>~</span><span>/</span><span>.zsh</span><span> </span><span class="cm-def">$fpath</span><span>)</span><span>
+</span><span>
+</span><span>autoload</span><span> </span><span class="cm-attribute">-Uz</span><span> </span><span>compinit</span><span> </span><span>&#x26;</span><span>&#x26;</span><span> </span><span>compinit</span><span>
+</span></code></pre>
+<p>Now go inside <code>.zshrc</code> file for add code lines.</p>
+<pre class="cm-s-material-darker CodeMirror language-bash"><code class="language-bash"><span>    </span><span class="cm-comment"># Go to top directory</span><span>
+</span><span>    </span><span class="cm-comment"># check all files for checking .zshrc file</span><span>
+</span><span>    </span><span class="cm-comment"># if does not exist create one . If you have .zshrc file skip touch .zshrc part.</span><span>
+</span><span>    </span><span class="cm-comment"># Then go insede using vim, nano, etc.</span><span>
+</span><span>    </span><span class="cm-builtin">cd</span><span>
+</span><span>    </span><span class="cm-builtin">ls</span><span> </span><span class="cm-attribute">-la</span><span>
+</span><span>    </span><span class="cm-builtin">touch</span><span> </span><span>.zshrc</span><span>
+</span><span>    </span><span>nano</span><span> </span><span>.zshrc</span><span>
+</span></code></pre>
+<p>Now you opened <code>.zshrc</code> file paste the code lines here. Then save it with <code>ˆX</code> then press <code>enter</code> to save.</p>
+<blockquote>
+<p>On your first run clear auto-completion cache.</p>
+</blockquote>
+<pre class="cm-s-material-darker CodeMirror language-bash"><code class="language-bash"><span>    </span><span class="cm-builtin">rm</span><span> </span><span>.zcompdump</span><span>
+</span></code></pre>
+<ul>
+<li>Now, open the terminal again and try it.</li>
+<li>Write <code>git he</code> then press TAB.</li>
+</ul>
+</body>
+</html>
